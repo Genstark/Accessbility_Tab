@@ -1,0 +1,17 @@
+/* @import url('https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap'); */
+/* @import url('http://dyslexicfonts.com/fonts/OpenDyslexic-Italic.ttf'); */
+/* @import url('https://gist.github.com/mvilrokx/4536584.js'); */
+@import "tailwindcss";
+
+body {
+    /* background-color: #dedede; */
+    background-color: #f8faf7;
+}
+
+.dyslexic-text {
+    font-family: "OpenDyslexic", "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0em;
+}
