@@ -15,3 +15,13 @@ body {
     line-height: 1.4;
     letter-spacing: 0em;
 }
+
+.range-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background-color: #D16A3B;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}

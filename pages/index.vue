@@ -13,67 +13,46 @@
         <div class="bg-white mt-6 pl-9 p-6 rounded-lg shadow-sm w-6xl relative">
             <h2 class="text-xl font-bold text-[#2D2D2D]">Accessibility</h2>
 
-            <div class="mt-5">
-                <div class="flex">
-                    <img src="../public/font.png" class="w-[24px] h-[24px]" alt="">
-                    <label class="font-semibold ml-2">Font Size: <span class="text-[#6B6B6B] font-normal">{{
-                        fontSizeChecker().textSize }}</span></label>
-                </div>
-                <div
-                    class="flex items-center mt-4 justify-between border-[#dedede] rounded-xl w-72 bg-[#f8faf7] h-[60px]">
-                    <button class="text-4xl cursor-pointer rounded-xl negativeButton hover:bg-gray-200"
-                        aria-label="decrease font size" role="button" @click="decreaseFontSize">-</button>
-                    <div class="relative w-full">
-                        <hr class="absolute top-1/2 left-0 w-full border-gray-400 transform -translate-y-1/2" />
-                        <input type="range" min="1" max="4" step="1"
-                            :aria-valuetext="fontSizeChecker().textSize" v-model="fontSize"
-                            @input="updateFontSize" class="w-full appearance-none bg-transparent z-10 relative" />
-                        <div class="flex justify-between absolute top-1/2 w-full transform -translate-y-1/2">
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                        </div>
-                    </div>
-                    <button class="text-4xl cursor-pointer positiveButton rounded-xl hover:bg-gray-200"
-                        aria-label="increase font size" role="button" @click="increaseFontSize">+</button>
-                </div>
-            </div>
+            <Slider 
+                msg="Font Size" 
+                :image="fontIcon" 
+                :textSize="fontSizeChecker().textSize"
+                :decreaseButton="decreaseFontSize" 
+                :increaseButton="increaseFontSize" 
+                :changeFontSize="updateFontSize"
+                :fontValue="fontSize" 
+                ariaDecreaseButton="decrease font size"
+                ariaIncreaseButton="increase font size"
+            />
 
-            <div class="mt-4">
-                <div class="flex">
-                    <img src="../public/line-spacing.png" class="w-[24px] h-[24px]" alt="">
-                    <label class="font-semibold ml-2">Line Spacing: <span class="text-[#6B6B6B] font-normal">{{
-                        lineSpacingChecker().lineSpace }}</span></label>
-                </div>
-                <div
-                    class="flex items-center justify-between border-[#dedede] rounded-xl w-72 bg-[#f8faf7] mt-4 h-[60px]">
-                    <button class="text-4xl cursor-pointer negativeButton rounded-xl hover:bg-gray-200"
-                        aria-label="decrease line spacing" role="button" @click="decreaseLineSpacing">-</button>
-                    <div class="relative w-full">
-                        <hr class="absolute top-1/2 left-0 w-full border-gray-400 transform -translate-y-1/2" />
-                        <input type="range" min="1" max="4" step="1" v-model="lineSpacing" @input="updateLineSpacing"
-                            :aria-valuetext="lineSpacingChecker().lineSpace"
-                            class="w-full appearance-none bg-transparent z-10 relative" />
-                        <div class="flex justify-between absolute top-1/2 w-full transform -translate-y-1/2">
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                        </div>
-                    </div>
-                    <button class="text-4xl cursor-pointer positiveButton rounded-xl hover:bg-gray-200"
-                        aria-label="increase line spacing" role="button" @click="increaseLineSpacing">+</button>
-                </div>
-            </div>
+            <Slider
+                msg="Line Space"
+                :image="lineSpaceIcon"
+                :textSize="lineSpacingChecker().lineSpace"
+                :decreaseButton="decreaseLineSpacing" 
+                :increaseButton="increaseLineSpacing" 
+                :changeFontSize="updateLineSpacing"
+                :fontValue="lineSpacing"
+                ariaDecreaseButton="decrease line space"
+                ariaIncreaseButton="increase line space"
+            />
 
-            <div class="mt-12">
+            <Switch
+                label="High Contrast"
+                :iconSrc="contrastThem"
+                v-model="highContrast"
+                switchLeft="60"
+                switchTop="2"
+            />
+
+            <!-- <div class="mt-12">
                 <label class="inline-flex items-center cursor-pointer" id="highContrastLabel">
                     <img src="../public/brightness.png" class="h-[24px] w-[24px]" alt="">
                     <span class="font-semibold ml-[10px]">High Contrast</span>
                     <input type="checkbox" value="" class="sr-only peer" v-model="highContrast" id="highContrastToggle"
                         aria-labelledby="highContrastLabel">
-                    <div class="relative left-[60px] top-[2px] w-11 h-6 bg-gray-200 
+                    <div
+                        class="relative left-[60px] top-[2px] w-11 h-6 bg-gray-200 
                         peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-[#000000] 
                         dark:peer-focus-visible:outline-[#000000] 
                         rounded-full peer dark:bg-gray-700 
@@ -81,13 +60,23 @@
                         peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
                         after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
                         after:transition-all dark:border-gray-600 peer-checked:bg-[#D16A3B] dark:peer-checked:bg-[#D16A3B]">
-                        <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]" v-if="highContrast">I</span>
-                        <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]" v-if="!highContrast">O</span>
+                        <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]"
+                            v-if="highContrast">I</span>
+                        <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]"
+                            v-if="!highContrast">O</span>
                     </div>
                 </label>
-            </div>
+            </div> -->
 
-            <div class="mt-12">
+            <Switch
+                label="OpenDyslexic Font"
+                :iconSrc="dyslexicFont"
+                v-model="openDyslexicFont"
+                switchLeft="24"
+                switchTop="2"
+            />
+
+            <!-- <div class="mt-12">
                 <label class="inline-flex items-center cursor-pointer">
                     <img src="../public/translation.png" class="h-[24px] w-[24px]" alt="">
                     <span class="font-semibold ml-[10px]">OpenDyslexic Font</span>
@@ -101,13 +90,23 @@
                         peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
                         after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
                         after:transition-all dark:border-gray-600 peer-checked:bg-[#D16A3B] dark:peer-checked:bg-[#D16A3B]">
-                        <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]" v-if="openDyslexicFont">I</span>
-                        <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]" v-if="!openDyslexicFont">O</span>
+                        <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]"
+                            v-if="openDyslexicFont">I</span>
+                        <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]"
+                            v-if="!openDyslexicFont">O</span>
                     </div>
                 </label>
-            </div>
+            </div> -->
 
-            <div class="mt-12">
+            <Switch
+                label="Underline Links"
+                :iconSrc="underline"
+                v-model="underlineLinks"
+                switchLeft="48"
+                switchTop="2"
+            />
+
+            <!-- <div class="mt-12">
                 <label class="inline-flex items-center cursor-pointer">
                     <img src="../public/underline.png" class="h-[24px] w-[24px]" alt="">
                     <span class="font-semibold ml-[10px]">Underline Links</span>
@@ -121,11 +120,13 @@
                         peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
                         after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
                         after:transition-all dark:border-gray-600 peer-checked:bg-[#D16A3B] dark:peer-checked:bg-[#D16A3B]">
-                        <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]" v-if="underlineLinks">I</span>
-                        <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]" v-if="!underlineLinks">O</span>
+                        <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]"
+                            v-if="underlineLinks">I</span>
+                        <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]"
+                            v-if="!underlineLinks">O</span>
                     </div>
                 </label>
-            </div>
+            </div> -->
 
             <div class="mt-3 border p-3 w-fit h-fit absolute right-0 rounded-lg top-[28%] mr-6"
                 :class="{ 'dyslexic-text': openDyslexicFont }" aria-hidden="true">
@@ -134,10 +135,9 @@
                     Here's a page header style
                 </h3>
 
-                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="
-                    fontSizeChecker().fontSize,
+                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="fontSizeChecker().fontSize,
                     lineSpacingChecker().lineHeight
-                ">
+                    ">
                     Check it out! Here's an example body paragraph. Toggle <br />
                     the font size to make this text larger or smaller. Saving <br />
                     these changes will update the text across the entire <br />
@@ -169,7 +169,8 @@
                 <label class="ml-auto relative mb-[9px] text-[#6B6B6B] hover:cursor-pointer">More Details</label>
                 <img src="../public/maximize.png" class="h-[24px] w-[24px] cursor-pointer mb-2 ml-1" alt="">
                 <div aria-hidden="true">
-                    <button class="border rounded-xl p-2 ml-2 hover:cursor-pointer" @click="resetButton" disabled>Reset Default
+                    <button class="border rounded-xl p-2 ml-2 hover:cursor-pointer" @click="resetButton" disabled>Reset
+                        Default
                         Settings</button>
                     <button class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:cursor-pointer" disabled
                         @click="settingChangeMessage">Apply Settings</button>
@@ -191,6 +192,11 @@ after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:bo
  -->
 
 <script setup>
+import fontIcon from '../public/font.png';
+import lineSpaceIcon from '../public/line-spacing.png';
+import contrastThem from '../public/brightness.png';
+import dyslexicFont from '../public/translation.png';
+import underline from '../public/underline.png';
 import { ref, watch } from 'vue';
 
 const fontSize = ref(2);
@@ -289,7 +295,7 @@ const increaseLineSpacing = () => {
 </script>
 
 <style scoped>
-input[type="range"]::-webkit-slider-thumb {
+/* input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     width: 14px;
     height: 14px;
@@ -297,18 +303,10 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     cursor: pointer;
     position: relative;
-}
+} */
 
-.spanchecker:hover {
-    cursor: pointer;
-}
-
+/* 
 .negativeButton {
-    /* position: relative;
-    bottom: 5px;
-    right: 5px;
-    margin-left: 8px;
-    margin-right: 8px; */
     height: 100%;
     box-sizing: border-box;
     padding-bottom: 9px;
@@ -317,17 +315,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .positiveButton {
-    /* position: relative;
-    bottom: 5px;
-    left: 5px;
-    margin-left: 8px;
-    margin-right: 8px; */
     height: 100%;
     box-sizing: border-box;
     padding-bottom: 9px;
     width: 59px;
     margin-left: 5px;
-}
+} */
 
 /* 
     position: relative;
