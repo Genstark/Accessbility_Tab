@@ -29,8 +29,8 @@ defineProps({
     label: String, // Label for the toggle
     iconSrc: String, // Icon image source
     modelValue: Boolean, // v-model for two-way binding (no need for emit)
-    switchLeft: Number, // Left position of the toggle
-    switchTop: Number // Top position of the toggle
+    switchLeft: String, // Left position of the toggle
+    switchTop: String // Top position of the toggle
 });
 defineEmits(["update:modelValue"]); // Required to update the parent state  
 </script>
