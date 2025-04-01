@@ -1,15 +1,14 @@
-<script setup>
+<script setup lang="ts">
+import { defineProps, defineEmits } from "vue";
 defineProps({
     msg: String,
     image: String,
     textSize: String,
-    decreaseButton: Function,
-    increaseButton: Function,
-    changeFontSize: Function,
     fontValue: Number,
     ariaDecreaseButton: String,
     ariaIncreaseButton: String
 });
+const emit = defineEmits(['decreaseButton', 'increaseButton', 'changeFontSize']);
 </script>
 
 <template>
@@ -25,7 +24,7 @@ defineProps({
             <button class="text-4xl cursor-pointer rounded-xl negativeButton hover:bg-gray-200" 
                 style="height: 100%; box-sizing: border-box; padding-bottom: 9px;
                 width: 59px; margin-right: 5px;" 
-                @click="decreaseButton"
+                @click="emit('decreaseButton')"
                 :aria-label="ariaDecreaseButton"
                 role="button"
             >-
@@ -33,7 +32,7 @@ defineProps({
 
             <div class="relative w-full">
                 <hr class="absolute top-1/2 left-0 w-full border-gray-400 transform -translate-y-1/2" />
-                <input type="range" min="1" max="4" step="1" :value="fontValue" @input="changeFontSize"
+                <input type="range" min="1" max="4" step="1" :value="fontValue" @input="emit('changeFontSize', fontValue)"
                     class="w-full appearance-none bg-transparent z-10 relative range-slider"
                     :aria-valuetext="textSize" 
                 />
@@ -48,7 +47,7 @@ defineProps({
             <button class="text-4xl cursor-pointer rounded-xl hover:bg-gray-200" 
                 style="height: 100%; box-sizing: border-box; padding-bottom: 9px;
                 width: 59px; margin-left: 5px;" 
-                @click="increaseButton"
+                @click="emit('increaseButton')"
                 :aria-label="ariaIncreaseButton"
                 role="button"
             >+
@@ -59,29 +58,4 @@ defineProps({
 
 
 <style scoped>
-/* input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    background-color: #D16A3B;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-} */
-
-/* .negativeButton {
-    height: 100%;
-    box-sizing: border-box;
-    padding-bottom: 9px;
-    width: 59px;
-    margin-right: 5px;
-} */
-
-/* .positiveButton {
-    height: 100%;
-    box-sizing: border-box;
-    padding-bottom: 9px;
-    width: 59px;
-    margin-left: 5px;
-} */
 </style>

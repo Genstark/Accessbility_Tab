@@ -4,7 +4,7 @@
             <img :src="iconSrc" class="h-[24px] w-[24px]" alt="" />
             <span class="font-semibold ml-[10px]">{{ label }}</span>
             <input type="checkbox" class="sr-only peer" :checked="modelValue"
-                @change="$emit('update:modelValue', $event.target.checked)" />
+                @change="(event) => $emit('update:modelValue', (event.target as HTMLInputElement).checked)" />
             <div class="relative transition-all w-11 h-6 bg-gray-200 
                 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-[#000000] 
                 dark:peer-focus-visible:outline-[#000000] 
@@ -14,7 +14,7 @@
                 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
                 after:transition-all dark:border-gray-600 peer-checked:bg-[#D16A3B] dark:peer-checked:bg-[#D16A3B]"
                 :style="{ left: switchLeft + 'px', top: switchTop + 'px' }"
-                >
+            >
                 <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]"
                     v-if="modelValue">I</span>
                 <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]"
@@ -24,11 +24,12 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { defineProps, defineEmits } from 'vue';
 defineProps({
     label: String, // Label for the toggle
     iconSrc: String, // Icon image source
-    modelValue: Boolean, // v-model for two-way binding (no need for emit)
+    modelValue: Boolean,
     switchLeft: String, // Left position of the toggle
     switchTop: String // Top position of the toggle
 });
