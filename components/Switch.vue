@@ -1,3 +1,14 @@
+<script setup lang="ts">
+defineProps({
+    label: String, // Label for the toggle
+    iconSrc: String, // Icon image source
+    modelValue: Boolean,
+    switchLeft: String, // Left position of the toggle
+    switchTop: String // Top position of the toggle
+});
+defineEmits(["update:modelValue"]); // Required to update the parent state  
+</script>
+
 <template>
     <div class="mt-12">
         <label class="inline-flex items-center cursor-pointer">
@@ -23,15 +34,3 @@
         </label>
     </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
-defineProps({
-    label: String, // Label for the toggle
-    iconSrc: String, // Icon image source
-    modelValue: Boolean,
-    switchLeft: String, // Left position of the toggle
-    switchTop: String // Top position of the toggle
-});
-defineEmits(["update:modelValue"]); // Required to update the parent state  
-</script>

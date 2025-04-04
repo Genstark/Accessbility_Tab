@@ -4,7 +4,7 @@ import lineSpaceIcon from '../public/line-spacing.png';
 import contrastThem from '../public/brightness.png';
 import dyslexicFont from '../public/translation.png';
 import underline from '../public/underline.png';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 const fontSize = ref(2);
 const lineSpacing = ref(2);
@@ -12,120 +12,21 @@ const lineSpacing = ref(2);
 const highContrast = ref(false);
 const openDyslexicFont = ref(false);
 const underlineLinks = ref(false);
-let changes = false;
 
-watch([highContrast, openDyslexicFont, underlineLinks, fontSize, lineSpacing], (newValue) => {
-    console.log('toggle is working');
-    changes = true;
-});
-
-function settingChangeMessage() {
-    // console.log('settings changed');
-    if (changes === true) {
-        alert('Your Default setting is change');
-    }
-    else {
-        alert('No changes made');
-    }
-}
-
-function resetButton() {
-    fontSize.value = 2;
-    lineSpacing.value = 2;
-    highContrast.value = false;
-    openDyslexicFont.value = false;
-    underlineLinks.value = false;
-    changes = false;
-}
-
-const updateFontSize = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    fontSize.value = Number(target.value);
-};
-
-const updateLineSpacing = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    lineSpacing.value = Number(target.value);
-};
-
-const fontSizeChecker = () => {
-    if (fontSize.value == 1) {
-        return { "textSize": "Small", "fontSize": 'text-sm' };
-    }
-    else if (fontSize.value == 2) {
-        return { "textSize": "Default", "fontSize": 'text-base' };
-    }
-    else if (fontSize.value == 3) {
-        return { "textSize": "Large", "fontSize": 'text-lg' };
-    }
-    else {
-        return { "textSize": "Extra-Large", "fontSize": 'text-xl' };
-    }
-};
-
-const lineSpacingChecker = () => {
-    if (lineSpacing.value == 1) {
-        return { "lineSpace": "Single", "lineHeight": 'leading-[20px]' };
-    }
-    else if (lineSpacing.value == 2) {
-        return { "lineSpace": "Default", "lineHeight": 'leading-[25px]' };
-    }
-    else if (lineSpacing.value == 3) {
-        return { "lineSpace": "Double", "lineHeight": 'leading-[30px]' };
-    }
-    else {
-        return { "lineSpace": "Extra-Double", "lineHeight": 'leading-[35px]' };
-    }
-};
-
-const decreaseFontSize = () => {
-    if (fontSize.value > 1) {
-        fontSize.value--;
-    }
-};
-
-const increaseFontSize = () => {
-    if (fontSize.value < 4) {
-        fontSize.value++;
-    }
-};
-
-const decreaseLineSpacing = () => {
-    if (lineSpacing.value > 1) {
-        lineSpacing.value--;
-    }
-};
-
-const increaseLineSpacing = () => {
-    if (lineSpacing.value < 4) {
-        lineSpacing.value++;
-    }
-};
-
-const sliders = [
-    {
-        msg: "Font Size",
-        image: fontIcon,
-        textSize: fontSizeChecker().textSize,
-        decreaseButton: decreaseFontSize,
-        increaseButton: increaseFontSize,
-        changeFontSize: updateFontSize,
-        fontValue: fontSize,
-        ariaDecreaseButton: "decrease font size",
-        ariaIncreaseButton: "increase font size"
-    },
-    {
-        msg: "Line Space",
-        image: lineSpaceIcon,
-        textSize: lineSpacingChecker().lineSpace,
-        decreaseButton: decreaseLineSpacing,
-        increaseButton: increaseLineSpacing,
-        changeFontSize: updateLineSpacing,
-        fontValue: lineSpacing,
-        ariaDecreaseButton: "decrease line space",
-        ariaIncreaseButton: "increase line space"
-    }
+const font = [
+    { "textSize": "Small", "fontSize": 'text-sm' },
+    { "textSize": "Default", "fontSize": 'text-base' },
+    { "textSize": "Large", "fontSize": 'text-lg' },
+    { "textSize": "Extra Large", "fontSize": 'text-xl' },
 ];
+
+const linespace = [
+    { "lineSpace": "Single", "lineHeight": 'leading-[20px]' },
+    { "lineSpace": "Default", "lineHeight": 'leading-[25px]' },
+    { "lineSpace": "Double", "lineHeight": 'leading-[30px]' },
+    { "lineSpace": "Extra-Double", "lineHeight": 'leading-[35px]' }
+];
+
 
 const switches = [
     {
@@ -151,6 +52,14 @@ const switches = [
     }
 ];
 
+
+function fontupdate(newvalue: number) {
+    fontSize.value = newvalue;
+}
+
+function lineudpate(newvalue: number){
+    lineSpacing.value = newvalue;
+}
 </script>
 
 <template>
@@ -169,17 +78,23 @@ const switches = [
             <h2 class="text-xl font-bold text-[#2D2D2D]">Accessibility</h2>
 
             <Slider 
-                v-for="(slider, index) in sliders" 
-                :key="index"
-                :msg="slider.msg"
-                :image="slider.image"
-                :textSize="slider.textSize"
-                :fontValue="slider.fontValue.value"
-                :ariaDecreaseButton="slider.ariaDecreaseButton"
-                :ariaIncreaseButton="slider.ariaIncreaseButton"
-                @decreaseButton="slider.decreaseButton"
-                @increaseButton="slider.increaseButton"
-                @changeFontSize="slider.changeFontSize"
+                heading="Font Size"
+                :icon="fontIcon"
+                :currentValue="2"
+                ariaDecreaseButton="decrease button"
+                ariaIncreaseButton="increase button"
+                @updateValue="fontupdate"
+                :currnetSize="font[fontSize-1].textSize"
+            />
+
+            <Slider 
+                heading="Line Height"
+                :icon="lineSpaceIcon"
+                :currentValue="2"
+                ariaDecreaseButton="decrease button"
+                ariaIncreaseButton="increase button"
+                @updateValue="lineudpate"
+                :currnetSize="linespace[lineSpacing-1].lineSpace"
             />
 
             <Switch
@@ -199,9 +114,7 @@ const switches = [
                     Here's a page header style
                 </h3>
 
-                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="fontSizeChecker().fontSize,
-                    lineSpacingChecker().lineHeight
-                    ">
+                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="font[fontSize-1].fontSize, linespace[lineSpacing-1].lineHeight">
                     Check it out! Here's an example body paragraph. Toggle <br />
                     the font size to make this text larger or smaller. Saving <br />
                     these changes will update the text across the entire <br />
@@ -233,17 +146,14 @@ const switches = [
                 <label class="ml-auto relative mb-[9px] text-[#6B6B6B] hover:cursor-pointer">More Details</label>
                 <img src="../public/maximize.png" class="h-[24px] w-[24px] cursor-pointer mb-2 ml-1" alt="">
                 <div aria-hidden="true">
-                    <button class="border rounded-xl p-2 ml-2 hover:cursor-pointer" @click="resetButton" disabled>Reset
+                    <button class="border rounded-xl p-2 ml-2 hover:cursor-pointer" disabled>Reset
                         Default
                         Settings</button>
-                    <button class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:cursor-pointer" disabled
-                        @click="settingChangeMessage">Apply Settings</button>
+                    <button class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:cursor-pointer" 
+                        disabled>Apply Settings
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
-
-<style scoped>
-</style>
