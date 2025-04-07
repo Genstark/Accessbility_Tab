@@ -1,0 +1,38 @@
+{
+    "fontSize": {
+        "1": {
+            "textSize": "Small",
+            "fontSize": "text-sm"
+        },
+        "2": {
+            "textSize": "Default",
+            "fontSize": "text-base"
+        },
+        "3": {
+            "textSize": "Large",
+            "fontSize": "text-lg"
+        },
+        "4": {
+            "textSize": "Extra Large",
+            "fontSize": "text-xl"
+        }
+    },
+    "lineHeight": {
+        "1": {
+            "lineSpace": "Small",
+            "lineHeight": "leading-[20px]"
+        },
+        "2": {
+            "lineSpace": "Deafult",
+            "lineHeight": "leading-[25px]"
+        },
+        "3": {
+            "lineSpace": "Double",
+            "lineHeight": "leading-[30px]"
+        },
+        "4": {
+            "lineSpace": "Extra Double",
+            "lineHeight": "leading-[35px]"
+        }
+    }
+}

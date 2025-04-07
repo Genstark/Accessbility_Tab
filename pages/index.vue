@@ -78,21 +78,21 @@ function lineudpate(newvalue: number){
             <h2 class="text-xl font-bold text-[#2D2D2D]">Accessibility</h2>
 
             <Slider 
-                heading="Font Size"
-                :icon="fontIcon"
+                label="Font Size"
+                :iconUrl="fontIcon"
                 :currentValue="2"
-                ariaDecreaseButton="decrease button"
-                ariaIncreaseButton="increase button"
+                ariaLabelDecreaseButton="decrease button"
+                ariaLabelIncreaseButton="increase button"
                 @updateValue="fontupdate"
                 :currnetSize="font[fontSize-1].textSize"
             />
 
             <Slider 
-                heading="Line Height"
-                :icon="lineSpaceIcon"
+                label="Line Height"
+                :iconUrl="lineSpaceIcon"
                 :currentValue="2"
-                ariaDecreaseButton="decrease button"
-                ariaIncreaseButton="increase button"
+                ariaLabelDecreaseButton="decrease button"
+                ariaLabelIncreaseButton="increase button"
                 @updateValue="lineudpate"
                 :currnetSize="linespace[lineSpacing-1].lineSpace"
             />
@@ -101,10 +101,10 @@ function lineudpate(newvalue: number){
                 v-for="(item, index) in switches"
                 :key="index"
                 :label="item.label"
-                :iconSrc="item.iconSrc"
+                :iconUrl="item.iconSrc"
                 v-model="item.modelValue.value"
-                :switchLeft="item.switchLeft"
-                :switchTop="item.switchTop"
+                :leftPosition="item.switchLeft"
+                :topPosition="item.switchTop"
             />
 
             <div class="mt-3 border p-3 w-fit h-fit absolute right-0 rounded-lg top-[28%] mr-6"

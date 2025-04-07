@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const props = defineProps({
-    heading: String,
-    icon: String,
+    label: String,
+    iconUrl: String,
     currentValue: Number || String,
-    ariaDecreaseButton: String,
-    ariaIncreaseButton: String,
+    ariaLabelDecreaseButton: String,
+    ariaLabelIncreaseButton: String,
     currnetSize: String,
 });
 
@@ -30,8 +30,8 @@ function increaseButton(){
 <template>
     <div class="mt-5">
         <div class="flex items-center">
-            <img :src="icon" class="w-[24px] h-[24px]" alt="">
-            <label class="font-semibold ml-2">{{ props.heading }}:
+            <img :src="iconUrl" class="w-[24px] h-[24px]" alt="">
+            <label class="font-semibold ml-2">{{ props.label }}:
                 <span class="text-[#6B6B6B] font-normal">{{ props.currnetSize }}</span>
             </label>
         </div>
@@ -41,7 +41,7 @@ function increaseButton(){
                 style="height: 100%; box-sizing: border-box; padding-bottom: 9px;
                 width: 59px; margin-right: 5px;" 
                 @click="decreaseButton"
-                :aria-label="props.ariaDecreaseButton"
+                :aria-label="props.ariaLabelDecreaseButton"
                 role="button"
             >-
             </button>
@@ -64,7 +64,7 @@ function increaseButton(){
                 style="height: 100%; box-sizing: border-box; padding-bottom: 9px;
                 width: 59px; margin-left: 5px;" 
                 @click="increaseButton"
-                :aria-label="props.ariaIncreaseButton"
+                :aria-label="props.ariaLabelIncreaseButton"
                 role="button"
             >+
             </button>
