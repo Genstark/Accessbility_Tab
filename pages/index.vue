@@ -6,12 +6,12 @@ import dyslexicFont from '../public/translation.png';
 import underline from '../public/underline.png';
 import { ref } from 'vue';
 
-const fontSize = ref(2);
-const lineSpacing = ref(2);
+const selectedFontSize = ref(2);
+const selectedLineSpacing = ref(2);
 
-const highContrast = ref(false);
-const openDyslexicFont = ref(false);
-const underlineLinks = ref(false);
+const isHighContrast = ref(false);
+const useDyslexicFont = ref(false);
+const showUnderlinedLinks = ref(false);
 
 const font = [
     { "textSize": "Small", "fontSize": 'text-sm' },
@@ -32,21 +32,21 @@ const switches = [
     {
         label: "High Contrast",
         iconSrc: contrastThem,
-        modelValue: highContrast,
+        modelValue: isHighContrast,
         switchLeft: '60',
         switchTop: '2'
     },
     {
         label: "OpenDyslexic Font",
         iconSrc: dyslexicFont,
-        modelValue: openDyslexicFont,
+        modelValue: useDyslexicFont,
         switchLeft: '24',
         switchTop: '2'
     },
     {
         label: "Underline Links",
         iconSrc: underline,
-        modelValue: underlineLinks,
+        modelValue: showUnderlinedLinks,
         switchLeft: '48',
         switchTop: '2'
     }
@@ -54,11 +54,11 @@ const switches = [
 
 
 function fontupdate(newvalue: number) {
-    fontSize.value = newvalue;
+    selectedFontSize.value = newvalue;
 }
 
 function lineudpate(newvalue: number){
-    lineSpacing.value = newvalue;
+    selectedFontSize.value = newvalue;
 }
 </script>
 
@@ -84,7 +84,7 @@ function lineudpate(newvalue: number){
                 ariaLabelDecreaseButton="decrease button"
                 ariaLabelIncreaseButton="increase button"
                 @updateValue="fontupdate"
-                :currnetSize="font[fontSize-1].textSize"
+                :currnetSize="font[selectedFontSize-1].textSize"
             />
 
             <Slider 
@@ -94,7 +94,7 @@ function lineudpate(newvalue: number){
                 ariaLabelDecreaseButton="decrease button"
                 ariaLabelIncreaseButton="increase button"
                 @updateValue="lineudpate"
-                :currnetSize="linespace[lineSpacing-1].lineSpace"
+                :currnetSize="linespace[selectedLineSpacing-1].lineSpace"
             />
 
             <Switch
@@ -108,34 +108,34 @@ function lineudpate(newvalue: number){
             />
 
             <div class="mt-3 border p-3 w-fit h-fit absolute right-0 rounded-lg top-[28%] mr-6"
-                :class="{ 'dyslexic-text': openDyslexicFont }" aria-hidden="true">
+                :class="{ 'dyslexic-text': useDyslexicFont }" aria-hidden="true">
 
                 <h3 class="text-lg font-semibold">
                     Here's a page header style
                 </h3>
 
-                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="font[fontSize-1].fontSize, linespace[lineSpacing-1].lineHeight">
+                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="font[selectedFontSize-1].fontSize, linespace[selectedLineSpacing-1].lineHeight">
                     Check it out! Here's an example body paragraph. Toggle <br />
                     the font size to make this text larger or smaller. Saving <br />
                     these changes will update the text across the entire <br />
                     app.
                 </p>
 
-                <a href="#" class="text-xs font-normal text-[#D16A3B]" :class="{ 'underline': underlineLinks }"
+                <a href="#" class="text-xs font-normal text-[#D16A3B]" :class="{ 'underline': showUnderlinedLinks }"
                     tabindex="-1">
                     Link to resources
                 </a>
                 <br />
 
                 <div class="flex justify-end items-end mt-4 gap-2">
-                    <button class="p-2 cursor-pointer" :class="{ 'underline': underlineLinks }" tabindex="-1" disabled>
+                    <button class="p-2 cursor-pointer" :class="{ 'underline': showUnderlinedLinks }" tabindex="-1" disabled>
                         Button 1
                     </button>
 
                     <button class="border cursor-pointer p-2 text-medium rounded-lg" :class="{
-                        'underline': underlineLinks,
-                        'bg-gray-900 text-white': highContrast,
-                        'bg-[#D16A3B] text-white': !highContrast
+                        'underline': showUnderlinedLinks,
+                        'bg-gray-900 text-white': isHighContrast    ,
+                        'bg-[#D16A3B] text-white': !isHighContrast
                     }" tabindex="-1" disabled>
                         Button 2
                     </button>
