@@ -4,6 +4,7 @@ import lineSpaceIcon from '../public/line-spacing.png';
 import contrastThem from '../public/brightness.png';
 import dyslexicFont from '../public/translation.png';
 import underline from '../public/underline.png';
+import json from '../public/config.json';
 import { ref } from 'vue';
 
 const selectedFontSize = ref(2);
@@ -84,7 +85,7 @@ function lineudpate(newvalue: number){
                 ariaLabelDecreaseButton="decrease button"
                 ariaLabelIncreaseButton="increase button"
                 @updateValue="fontupdate"
-                :currnetSize="font[selectedFontSize-1].textSize"
+                :currnetSize="json.fontSize[selectedFontSize-1].text"
             />
 
             <Slider 
@@ -94,7 +95,7 @@ function lineudpate(newvalue: number){
                 ariaLabelDecreaseButton="decrease button"
                 ariaLabelIncreaseButton="increase button"
                 @updateValue="lineudpate"
-                :currnetSize="linespace[selectedLineSpacing-1].lineSpace"
+                :currnetSize="json.lineHeight[selectedLineSpacing-1].text"
             />
 
             <Switch
@@ -155,5 +156,6 @@ function lineudpate(newvalue: number){
                 </div>
             </div>
         </div>
+        <Button>Click me</Button>
     </div>
 </template>
