@@ -11,6 +11,12 @@ const props = defineProps({
 const emit = defineEmits(['updateValue']);
 const changeValue = ref(props.currentValue || 2);
 
+function clickOnThumb(event: number){
+    console.log('click');
+    changeValue.value = event;
+    emit('updateValue', changeValue.value);
+}
+
 function decreaseButton(){
     if (changeValue.value > 1) {
         changeValue.value--;
@@ -49,14 +55,14 @@ function increaseButton(){
             <div class="relative w-full">
                 <hr class="absolute top-1/2 left-0 w-full border-gray-400 transform -translate-y-1/2" />
                 <input type="range" min="1" max="4" step="1" v-model="changeValue"
-                    class="w-full appearance-none bg-transparent z-10 relative range-slider"
+                    class="w-full appearance-none bg-transparent z-10 relative range-slider pointer-events-none"
                     :aria-valuetext="currnetSize" 
                 />
-                <div class="flex justify-between absolute top-1/2 w-full transform -translate-y-1/2">
-                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
+                <div class="flex justify-between absolute top-1/2 w-full transform -translate-y-1/2 z-0">
+                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(1)"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(2)"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(3)"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(4)"></span>
                 </div>
             </div>
 
