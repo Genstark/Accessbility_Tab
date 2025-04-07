@@ -13,22 +13,22 @@ const isHighContrast = ref(false);
 const useDyslexicFont = ref(false);
 const showUnderlinedLinks = ref(false);
 
-const font = [
-    { "textSize": "Small", "fontSize": 'text-sm' },
-    { "textSize": "Default", "fontSize": 'text-base' },
-    { "textSize": "Large", "fontSize": 'text-lg' },
-    { "textSize": "Extra Large", "fontSize": 'text-xl' },
+const fontOptions = [
+    { "text": "Small", "class": 'text-sm' },
+    { "text": "Default", "class": 'text-base' },
+    { "text": "Large", "class": 'text-lg' },
+    { "text": "Extra Large", "class": 'text-xl' },
 ];
 
-const linespace = [
-    { "lineSpace": "Single", "lineHeight": 'leading-[20px]' },
-    { "lineSpace": "Default", "lineHeight": 'leading-[25px]' },
-    { "lineSpace": "Double", "lineHeight": 'leading-[30px]' },
-    { "lineSpace": "Extra-Double", "lineHeight": 'leading-[35px]' }
+const lineSpacingOptions = [
+    { "text": "Single", "class": 'leading-[20px]' },
+    { "text": "Default", "class": 'leading-[25px]' },
+    { "text": "Double", "class": 'leading-[30px]' },
+    { "text": "Extra-Double", "class": 'leading-[35px]' }
 ];
 
 
-const switches = [
+const toggleOptions = [
     {
         label: "High Contrast",
         iconSrc: contrastThem,
@@ -84,7 +84,7 @@ function lineudpate(newvalue: number){
                 ariaDecreaseButton="decrease button"
                 ariaIncreaseButton="increase button"
                 @updateValue="fontupdate"
-                :currnetSize="font[selectedFontSize-1].textSize"
+                :currnetSize="fontOptions[selectedFontSize-1].text"
             />
 
             <Slider 
@@ -94,11 +94,11 @@ function lineudpate(newvalue: number){
                 ariaDecreaseButton="decrease button"
                 ariaIncreaseButton="increase button"
                 @updateValue="lineudpate"
-                :currnetSize="linespace[selectedLineSpacing-1].lineSpace"
+                :currnetSize="lineSpacingOptions[selectedLineSpacing-1].text"
             />
 
             <Switch
-                v-for="(item, index) in switches"
+                v-for="(item, index) in toggleOptions"
                 :key="index"
                 :label="item.label"
                 :iconUrl="item.iconSrc"
@@ -114,7 +114,7 @@ function lineudpate(newvalue: number){
                     Here's a page header style
                 </h3>
 
-                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="font[selectedFontSize-1].fontSize, linespace[selectedLineSpacing-1].lineHeight">
+                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="fontOptions[selectedFontSize-1].class, lineSpacingOptions[selectedLineSpacing-1].class">
                     Check it out! Here's an example body paragraph. Toggle <br />
                     the font size to make this text larger or smaller. Saving <br />
                     these changes will update the text across the entire <br />
