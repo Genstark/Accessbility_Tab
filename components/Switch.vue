@@ -13,7 +13,7 @@ defineEmits(["update:modelValue"]); // Required to update the parent state
     <div class="mt-12">
         <label class="inline-flex items-center cursor-pointer">
             <img :src="iconUrl" class="h-[24px] w-[24px]" alt="" />
-            <span class="font-semibold ml-[10px]">{{ label }}</span>
+            <span class="font-semibold ml-[10px]">{{ props.label }}</span>
             <input type="checkbox" class="sr-only peer" :checked="value"
                 @change="(event) => $emit('update:modelValue', (event.target as HTMLInputElement).checked)" />
             <div class="relative transition-all w-11 h-6 bg-gray-200 
@@ -27,9 +27,9 @@ defineEmits(["update:modelValue"]); // Required to update the parent state
                 :style="{ left: leftPosition + 'px', top: topPosition + 'px' }"
             >
                 <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]"
-                    v-if="value">I</span>
+                    v-if="props.value">I</span>
                 <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]"
-                    v-if="!value">O</span>
+                    v-if="!props.value">O</span>
             </div>
         </label>
     </div>
