@@ -101,7 +101,7 @@ function lineudpate(newvalue: number){
                 v-for="(item, index) in switches"
                 :key="index"
                 :label="item.label"
-                :iconSrc="item.iconSrc"
+                :iconUrl="item.iconSrc"
                 v-model="item.modelValue.value"
                 :switchLeft="item.switchLeft"
                 :switchTop="item.switchTop"

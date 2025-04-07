@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps({
     label: String, // Label for the toggle
-    iconSrc: String, // Icon image source
+    iconUrl: String, // Icon image source
     modelValue: Boolean,
     switchLeft: String, // Left position of the toggle
     switchTop: String // Top position of the toggle
@@ -12,7 +12,7 @@ defineEmits(["update:modelValue"]); // Required to update the parent state
 <template>
     <div class="mt-12">
         <label class="inline-flex items-center cursor-pointer">
-            <img :src="iconSrc" class="h-[24px] w-[24px]" alt="" />
+            <img :src="iconUrl" class="h-[24px] w-[24px]" alt="" />
             <span class="font-semibold ml-[10px]">{{ label }}</span>
             <input type="checkbox" class="sr-only peer" :checked="modelValue"
                 @change="(event) => $emit('update:modelValue', (event.target as HTMLInputElement).checked)" />
