@@ -1,0 +1,38 @@
+{
+    "fontSize": [
+        {
+            "text": "Small",
+            "class": "text-sm"
+        },
+        {
+            "text": "Default",
+            "class": "text-base"
+        },
+        {
+            "text": "Large",
+            "class": "text-lg"
+        },
+        {
+            "text": "Extra Large",
+            "class": "text-xl"
+        }
+    ],
+    "lineHeight": [
+        {
+            "text": "Small",
+            "class": "leading-[20px]"
+        },
+        {
+            "text": "Deafult",
+            "class": "leading-[25px]"
+        },
+        {
+            "text": "Double",
+            "class": "leading-[30px]"
+        },
+        {
+            "text": "Extra Double",
+            "class": "leading-[35px]"
+        }
+    ]
+}

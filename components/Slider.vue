@@ -1,10 +1,8 @@
 <script setup lang="ts">
 const props = defineProps({
-    heading: String,
+    label: String,
     icon: String,
     currentValue: Number || String,
-    ariaDecreaseButton: String,
-    ariaIncreaseButton: String,
     currnetSize: String,
 });
 
@@ -12,7 +10,6 @@ const emit = defineEmits(['updateValue']);
 const changeValue = ref(props.currentValue || 2);
 
 function clickOnThumb(event: number){
-    console.log('click');
     changeValue.value = event;
     emit('updateValue', changeValue.value);
 }
@@ -37,7 +34,7 @@ function increaseButton(){
     <div class="mt-5">
         <div class="flex items-center">
             <img :src="icon" class="w-[24px] h-[24px]" alt="">
-            <label class="font-semibold ml-2">{{ props.heading }}:
+            <label class="font-semibold ml-2">{{ props.label }}:
                 <span class="text-[#6B6B6B] font-normal">{{ props.currnetSize }}</span>
             </label>
         </div>
@@ -47,7 +44,7 @@ function increaseButton(){
                 style="height: 100%; box-sizing: border-box; padding-bottom: 9px;
                 width: 59px; margin-right: 5px;" 
                 @click="decreaseButton"
-                :aria-label="props.ariaDecreaseButton"
+                aria-label="decrease button"
                 role="button"
             >-
             </button>
@@ -70,7 +67,7 @@ function increaseButton(){
                 style="height: 100%; box-sizing: border-box; padding-bottom: 9px;
                 width: 59px; margin-left: 5px;" 
                 @click="increaseButton"
-                :aria-label="props.ariaIncreaseButton"
+                aria-label="increase button"
                 role="button"
             >+
             </button>

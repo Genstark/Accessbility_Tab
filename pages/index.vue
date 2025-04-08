@@ -4,6 +4,7 @@ import lineSpaceIcon from '../public/line-spacing.png';
 import contrastThem from '../public/brightness.png';
 import dyslexicFont from '../public/translation.png';
 import underline from '../public/underline.png';
+import json from '../public/config.json';
 import { ref } from 'vue';
 
 const selectedFontSize = ref(2);
@@ -12,21 +13,6 @@ const selectedLineSpacing = ref(2);
 const isHighContrast = ref(false);
 const useDyslexicFont = ref(false);
 const showUnderlinedLinks = ref(false);
-
-const fontOptions = [
-    { "text": "Small", "class": 'text-sm' },
-    { "text": "Default", "class": 'text-base' },
-    { "text": "Large", "class": 'text-lg' },
-    { "text": "Extra Large", "class": 'text-xl' },
-];
-
-const lineSpacingOptions = [
-    { "text": "Single", "class": 'leading-[20px]' },
-    { "text": "Default", "class": 'leading-[25px]' },
-    { "text": "Double", "class": 'leading-[30px]' },
-    { "text": "Extra-Double", "class": 'leading-[35px]' }
-];
-
 
 const toggleOptions = [
     {
@@ -51,7 +37,6 @@ const toggleOptions = [
         switchTop: '2'
     }
 ];
-
 
 function fontupdate(newvalue: number) {
     selectedFontSize.value = newvalue;
@@ -78,26 +63,22 @@ function lineudpate(newvalue: number){
             <h2 class="text-xl font-bold text-[#2D2D2D]">Accessibility</h2>
 
             <Slider 
-                heading="Font Size"
+                label="Font Size"
                 :icon="fontIcon"
                 :currentValue="2"
-                ariaDecreaseButton="decrease button"
-                ariaIncreaseButton="increase button"
                 @updateValue="fontupdate"
-                :currnetSize="fontOptions[selectedFontSize-1].text"
+                :currnetSize="json.fontSize[selectedFontSize-1].text"
             />
 
             <Slider 
-                heading="Line Height"
+                label="Line Height"
                 :icon="lineSpaceIcon"
                 :currentValue="2"
-                ariaDecreaseButton="decrease button"
-                ariaIncreaseButton="increase button"
                 @updateValue="lineudpate"
-                :currnetSize="lineSpacingOptions[selectedLineSpacing-1].text"
+                :currnetSize="json.lineHeight[selectedLineSpacing-1].text"
             />
 
-            <Switch
+            <LabeledSwitch
                 v-for="(item, index) in toggleOptions"
                 :key="index"
                 :label="item.label"
@@ -114,7 +95,7 @@ function lineudpate(newvalue: number){
                     Here's a page header style
                 </h3>
 
-                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="fontOptions[selectedFontSize-1].class, lineSpacingOptions[selectedLineSpacing-1].class">
+                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="json.fontSize[selectedFontSize-1].class, json.lineHeight[selectedLineSpacing-1].class">
                     Check it out! Here's an example body paragraph. Toggle <br />
                     the font size to make this text larger or smaller. Saving <br />
                     these changes will update the text across the entire <br />

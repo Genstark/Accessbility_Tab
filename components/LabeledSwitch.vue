@@ -26,9 +26,9 @@ defineEmits(["update:modelValue"]); // Required to update the parent state
                 after:transition-all dark:border-gray-600 peer-checked:bg-[#D16A3B] dark:peer-checked:bg-[#D16A3B]"
                 :style="{ left: switchLeft + 'px', top: switchTop + 'px' }"
             >
-                <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white]"
+                <span aria-hidden="true" class="relative left-[8px] bottom-[1px] text-[white] pointer-events-none select-none"
                     v-if="modelValue">I</span>
-                <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white]"
+                <span aria-hidden="true" class="relative left-[26px] bottom-[1px] text-[white] pointer-events-none select-none"
                     v-if="!modelValue">O</span>
             </div>
         </label>
