@@ -14,20 +14,6 @@ const isHighContrast = ref(false);
 const useDyslexicFont = ref(false);
 const showUnderlinedLinks = ref(false);
 
-const font = [
-    { "textSize": "Small", "fontSize": 'text-sm' },
-    { "textSize": "Default", "fontSize": 'text-base' },
-    { "textSize": "Large", "fontSize": 'text-lg' },
-    { "textSize": "Extra Large", "fontSize": 'text-xl' },
-];
-
-const linespace = [
-    { "lineSpace": "Single", "lineHeight": 'leading-[20px]' },
-    { "lineSpace": "Default", "lineHeight": 'leading-[25px]' },
-    { "lineSpace": "Double", "lineHeight": 'leading-[30px]' },
-    { "lineSpace": "Extra-Double", "lineHeight": 'leading-[35px]' }
-];
-
 
 const switches = [
     {
@@ -115,7 +101,7 @@ function lineudpate(newvalue: number){
                     Here's a page header style
                 </h3>
 
-                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="font[selectedFontSize-1].fontSize, linespace[selectedLineSpacing-1].lineHeight">
+                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="json.fontSize[selectedFontSize-1].class, json.lineHeight[selectedLineSpacing-1].class">
                     Check it out! Here's an example body paragraph. Toggle <br />
                     the font size to make this text larger or smaller. Saving <br />
                     these changes will update the text across the entire <br />
@@ -135,7 +121,7 @@ function lineudpate(newvalue: number){
 
                     <button class="border cursor-pointer p-2 text-medium rounded-lg" :class="{
                         'underline': showUnderlinedLinks,
-                        'bg-gray-900 text-white': isHighContrast    ,
+                        'bg-gray-900 text-white': isHighContrast,
                         'bg-[#D16A3B] text-white': !isHighContrast
                     }" tabindex="-1" disabled>
                         Button 2
@@ -156,6 +142,5 @@ function lineudpate(newvalue: number){
                 </div>
             </div>
         </div>
-        <Button>Click me</Button>
     </div>
 </template>
