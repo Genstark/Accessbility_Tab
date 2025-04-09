@@ -6,6 +6,7 @@ import dyslexicFont from '../public/translation.png';
 import underline from '../public/underline.png';
 import json from '../public/config.json';
 import { ref } from 'vue';
+import LabeledSwitch from '~/components/LabeledSwitch.vue';
 
 const selectedFontSize = ref(2);
 const selectedLineSpacing = ref(2);
@@ -19,23 +20,17 @@ const switches = [
     {
         label: "High Contrast",
         iconSrc: contrastThem,
-        modelValue: isHighContrast,
-        switchLeft: '60',
-        switchTop: '2'
+        modelValue: isHighContrast
     },
     {
         label: "OpenDyslexic Font",
         iconSrc: dyslexicFont,
-        modelValue: useDyslexicFont,
-        switchLeft: '24',
-        switchTop: '2'
+        modelValue: useDyslexicFont
     },
     {
         label: "Underline Links",
         iconSrc: underline,
-        modelValue: showUnderlinedLinks,
-        switchLeft: '48',
-        switchTop: '2'
+        modelValue: showUnderlinedLinks
     }
 ];
 
@@ -68,8 +63,6 @@ function lineudpate(newvalue: number){
                 label="Font Size"
                 :iconUrl="fontIcon"
                 :currentValue="2"
-                ariaLabelDecreaseButton="decrease button"
-                ariaLabelIncreaseButton="increase button"
                 @updateValue="fontupdate"
                 :currnetSize="json.fontSize[selectedFontSize-1].text"
             />
@@ -78,20 +71,16 @@ function lineudpate(newvalue: number){
                 label="Line Height"
                 :iconUrl="lineSpaceIcon"
                 :currentValue="2"
-                ariaLabelDecreaseButton="decrease button"
-                ariaLabelIncreaseButton="increase button"
                 @updateValue="lineudpate"
                 :currnetSize="json.lineHeight[selectedLineSpacing-1].text"
             />
 
-            <Switch
+            <LabeledSwitch
                 v-for="(item, index) in switches"
                 :key="index"
                 :label="item.label"
                 :iconUrl="item.iconSrc"
                 v-model="item.modelValue.value"
-                :leftPosition="item.switchLeft"
-                :topPosition="item.switchTop"
             />
 
             <div class="mt-3 border p-3 w-fit h-fit absolute right-0 rounded-lg top-[28%] mr-6"

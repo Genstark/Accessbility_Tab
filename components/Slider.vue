@@ -3,8 +3,6 @@ const props = defineProps({
     label: String,
     iconUrl: String,
     currentValue: Number || String,
-    ariaLabelDecreaseButton: String,
-    ariaLabelIncreaseButton: String,
     currnetSize: String,
 });
 
@@ -41,7 +39,7 @@ function increaseButton(){
                 style="height: 100%; box-sizing: border-box; padding-bottom: 9px;
                 width: 59px; margin-right: 5px;" 
                 @click="decreaseButton"
-                :aria-label="props.ariaLabelDecreaseButton"
+                aria-label="decrease button"
                 role="button"
             >-
             </button>
@@ -64,7 +62,7 @@ function increaseButton(){
                 style="height: 100%; box-sizing: border-box; padding-bottom: 9px;
                 width: 59px; margin-left: 5px;" 
                 @click="increaseButton"
-                :aria-label="props.ariaLabelIncreaseButton"
+                aria-label="increase button"
                 role="button"
             >+
             </button>
