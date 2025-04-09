@@ -19,22 +19,16 @@ const toggleOptions = [
         label: "High Contrast",
         iconSrc: contrastThem,
         modelValue: isHighContrast,
-        switchLeft: '60',
-        switchTop: '2'
     },
     {
         label: "OpenDyslexic Font",
         iconSrc: dyslexicFont,
         modelValue: useDyslexicFont,
-        switchLeft: '24',
-        switchTop: '2'
     },
     {
         label: "Underline Links",
         iconSrc: underline,
-        modelValue: showUnderlinedLinks,
-        switchLeft: '48',
-        switchTop: '2'
+        modelValue: showUnderlinedLinks
     }
 ];
 
@@ -84,8 +78,6 @@ function lineudpate(newvalue: number){
                 :label="item.label"
                 :iconUrl="item.iconSrc"
                 v-model="item.modelValue.value"
-                :switchLeft="item.switchLeft"
-                :switchTop="item.switchTop"
             />
 
             <div class="mt-3 border p-3 w-fit h-fit absolute right-0 rounded-lg top-[28%] mr-6"
