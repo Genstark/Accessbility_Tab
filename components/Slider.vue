@@ -9,6 +9,11 @@ const props = defineProps({
 const emit = defineEmits(['updateValue']);
 const changeValue = ref(props.currentValue || 2);
 
+function clickOnThumb(event: number){
+    changeValue.value = event;
+    emit('updateValue', changeValue.value);
+}
+
 function decreaseButton(){
     if (changeValue.value > 1) {
         changeValue.value--;
@@ -51,10 +56,10 @@ function increaseButton(){
                     :aria-valuetext="currnetSize" 
                 />
                 <div class="flex justify-between absolute top-1/2 w-full transform -translate-y-1/2">
-                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(1)"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(2)"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(3)"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(4)"></span>
                 </div>
             </div>
 
