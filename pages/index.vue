@@ -131,5 +131,27 @@ function lineudpate(newvalue: number){
                 </div>
             </div>
         </div>
+        <label class="inline-flex items-center cursor-pointer">
+            <Switch
+                class="relative w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors
+                focus-visible:outline focus-visible:outline-2 focus-visible:outline-black
+                data-[state=checked]:bg-[#D16A3B] dark:data-[state=checked]:bg-[#D16A3B]"
+            >
+                <!-- Knob -->
+                <span
+                    class="absolute top-[2px] left-[2px] h-5 w-5 bg-white border border-gray-300 dark:border-gray-600 rounded-full
+                    transition-transform duration-200 ease-in-out
+                    data-[state=checked]:translate-x-[22px]"
+                ></span>
+
+                <!-- I / O labels -->
+                <span
+                    class="absolute left-[8px] top-[1px] text-white text-xs font-bold pointer-events-none select-none"
+                >I</span>
+                <span
+                    class="absolute right-[6px] top-[1px] text-white text-xs font-bold pointer-events-none select-none"
+                >O</span>
+            </Switch>
+        </label>
     </div>
 </template>
