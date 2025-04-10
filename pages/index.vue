@@ -104,47 +104,44 @@ function lineudpate(newvalue: number){
                 <br />
 
                 <div class="flex justify-end items-end mt-4 gap-2">
-                    <button class="p-2 cursor-pointer" :class="{ 'underline': showUnderlinedLinks }" tabindex="-1" disabled>
+                    <button class="p-2 cursor-pointer font-meduim" :class="{ 'underline': showUnderlinedLinks }" tabindex="-1" disabled>
                         Button 1
                     </button>
 
-                    <button class="border cursor-pointer p-2 text-medium rounded-lg" :class="{
-                        'underline': showUnderlinedLinks,
-                        'bg-gray-900 text-white': isHighContrast,
-                        'bg-[#D16A3B] text-white': !isHighContrast
-                    }" tabindex="-1" disabled>
-                        Button 2
-                    </button>
+                    <Button size="lg" class="bg-[#D16A3B] hover:bg-[none] hover:cursor-pointer font-meduim text-[white] rounded-lg"
+                        :class="{
+                            'underline': showUnderlinedLinks,
+                            'bg-gray-900 text-white': isHighContrast,
+                            'bg-[#D16A3B] text-white': !isHighContrast
+                        }" tabindex="-1">Button 2
+                    </Button>
                 </div>
             </div>
 
             <div class="mt-6 flex justify-between items-end" aria-hidden="true">
-                <label class="ml-auto relative mb-[9px] text-[#6B6B6B] hover:cursor-pointer">More Details</label>
-                <img src="../public/maximize.png" class="h-[24px] w-[24px] cursor-pointer mb-2 ml-1" alt="">
+                <label class="ml-auto relative mb-[7px] text-[#6B6B6B] hover:cursor-pointer">More Details</label>
+                <img src="../public/maximize.png" class="h-[22px] w-[22px] cursor-pointer mb-2 ml-1" alt="">
                 <div aria-hidden="true">
-                    <button class="border rounded-xl p-2 ml-2 hover:cursor-pointer" disabled>Reset
-                        Default
-                        Settings</button>
-                    <button class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:cursor-pointer" 
-                        disabled>Apply Settings
-                    </button>
+                    <Button class="border rounded-xl p-2 ml-2 hover:cursor-pointer text-[#6B6B6B] bg-[white] hover:bg-[none]">
+                        Reset Default Settings
+                    </Button>
+                    <Button class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:cursor-pointer hover:bg-[none]">
+                        Apply Settings
+                    </Button>
                 </div>
             </div>
         </div>
-        <label class="inline-flex items-center cursor-pointer">
+        <!-- <label class="inline-flex items-center cursor-pointer">
             <Switch
                 class="relative w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors
                 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black
                 data-[state=checked]:bg-[#D16A3B] dark:data-[state=checked]:bg-[#D16A3B]"
             >
-                <!-- Knob -->
                 <span
                     class="absolute top-[2px] left-[2px] h-5 w-5 bg-white border border-gray-300 dark:border-gray-600 rounded-full
                     transition-transform duration-200 ease-in-out
                     data-[state=checked]:translate-x-[22px]"
                 ></span>
-
-                <!-- I / O labels -->
                 <span
                     class="absolute left-[8px] top-[1px] text-white text-xs font-bold pointer-events-none select-none"
                 >I</span>
@@ -152,6 +149,6 @@ function lineudpate(newvalue: number){
                     class="absolute right-[6px] top-[1px] text-white text-xs font-bold pointer-events-none select-none"
                 >O</span>
             </Switch>
-        </label>
+        </label> -->
     </div>
 </template>

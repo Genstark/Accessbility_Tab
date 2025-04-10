@@ -16,7 +16,7 @@ defineEmits(["update:modelValue"]);
         </div>
 
         <!-- Right: Toggle with I / O -->
-        <label class="inline-flex items-center cursor-pointer">
+        <div class="inline-flex items-center cursor-pointer">
             <input type="checkbox" class="sr-only peer" :checked="modelValue"
                 @change="(e) => $emit('update:modelValue', (e.target as HTMLInputElement).checked)" />
             <div class="relative w-11 h-6 bg-gray-500 rounded-full peer dark:bg-gray-700
@@ -28,6 +28,6 @@ defineEmits(["update:modelValue"]);
                 <span v-if="modelValue" class="absolute left-[7px] top-[2px] text-white text-sm font-semibold">I</span>
                 <span v-else class="absolute right-[7px] top-[2px] text-white text-sm font-semibold">O</span>
             </div>
-        </label>
+        </div>
     </div>
 </template>
