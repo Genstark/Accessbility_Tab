@@ -42,6 +42,12 @@ function fontupdate(newvalue: number) {
 function lineudpate(newvalue: number){
     selectedLineSpacing.value = newvalue;
 }
+
+const checked = ref(false);
+
+watch(checked, (newvalue) => {
+    console.log(newvalue);
+});
 </script>
 
 <template>
@@ -131,9 +137,32 @@ function lineudpate(newvalue: number){
                 </div>
             </div>
         </div>
-        <USwitch size="xl" label="Check me">
-            <span>o</span>
-        </USwitch>
+        <!-- <div>
+            <span v-if="checked" class="relative bottom-[5px] left-[13px] text-sm font-semibold text-[white] pointer-events-none select-none">I</span>
+            <Switch style="width: 45px; height: 25px;" v-model="checked" />
+            <span v-if="!checked" class="relative bottom-[5px] right-[16px] text-sm font-semibold text-[white] pointer-events-none select-none">O</span>
+        </div> -->
     </div>
-
 </template>
+
+<style scoped>
+/* button[role="switch"] span[data-slot="switch-thumb"] {
+    background-color: aquamarine !important;
+} */
+/* :deep(button[data-state="checked"]){
+    background-color: #D16A3B;
+}
+:deep(button[data-state="unchecked"]){
+    background-color: rgb(107 114 128) !important;
+}
+:deep(span[data-slot="switch-thumb"]) {
+    height: 20px;
+    width: 20px;
+}
+:deep(span[data-state="unchecked"]){
+    --tw-translate-x: 2px;
+}
+:deep(span[data-state="checked"]) {
+    --tw-translate-x: calc(100% - -2px);
+} */
+</style>
