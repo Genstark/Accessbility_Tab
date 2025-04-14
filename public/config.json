@@ -33,7 +33,7 @@
             "class": "leading-[21.6px]"
         },
         {
-            "text": "Deafult",
+            "text": "Default",
             "class": "leading-[25.2px]"
         },
         {
@@ -58,5 +58,9 @@
             "label": "Underline Links",
             "iconSrc": "/underline.png"
         }
-    ]
+    ],
+    "defaults": {
+        "fontSize": 2,
+        "lineHeight": 2
+    }
 }

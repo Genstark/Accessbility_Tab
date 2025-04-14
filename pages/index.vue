@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import json from '../public/config.json';
+import accessibilityConfig from '../public/config.json';
 import { ref } from 'vue';
 
-const selectedFontSize = ref(2);
-const selectedLineSpacing = ref(2);
+const selectedFontSize = ref(accessibilityConfig.defaults.fontSize);
+const selectedLineSpacing = ref(accessibilityConfig.defaults.lineHeight);
 
 const isHighContrast = ref(false);
 const useDyslexicFont = ref(false);
 const showUnderlinedLinks = ref(false);
-
 
 const toogleValue = [
     isHighContrast,
@@ -20,9 +19,10 @@ function fontupdate(newvalue: number) {
     selectedFontSize.value = newvalue;
 }
 
-function lineudpate(newvalue: number){
+function lineudpate(newvalue: number) {
     selectedLineSpacing.value = newvalue;
 }
+
 const slidercomponentfunction = [
     fontupdate,
     lineudpate
@@ -45,17 +45,17 @@ const slidercomponentfunction = [
             <h2 class="text-xl font-bold text-[#2D2D2D]">Accessibility</h2>
             
             <Slider 
-                v-for="(item, index) in json.slider"
+                v-for="(item, index) in accessibilityConfig.slider"
                 :key="index"
                 :label="item.label"
                 :iconUrl="item.iconSrc" 
                 @updateValue="slidercomponentfunction[index]"
-                :displayText="index === 0 ? json.fontSize[selectedFontSize-1].text : json.lineHeight[selectedLineSpacing-1].text"
+                :displayText="index === 0 ? accessibilityConfig.fontSize[selectedFontSize-1].text : accessibilityConfig.lineHeight[selectedLineSpacing-1].text"
                 :value="index === 0 ? selectedFontSize : selectedLineSpacing"
             />
 
             <LabeledSwitch
-                v-for="(item, index) in json.labeledSwitch"
+                v-for="(item, index) in accessibilityConfig.labeledSwitch"
                 :key="index"
                 :label="item.label"
                 :iconUrl="item.iconSrc"
@@ -69,7 +69,7 @@ const slidercomponentfunction = [
                     Here's a page header style
                 </h3>
 
-                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="json.fontSize[selectedFontSize-1].class, json.lineHeight[selectedLineSpacing-1].class">
+                <p class="mt-2 mb-2 text-[#6B6B6B]" :class="accessibilityConfig.fontSize[selectedFontSize-1].class, accessibilityConfig.lineHeight[selectedLineSpacing-1].class">
                     Check it out! Here's an example body paragraph. Toggle
                     the font size to make this text larger or smaller. Saving
                     these changes will update the text across the entire

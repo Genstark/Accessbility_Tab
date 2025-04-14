@@ -9,7 +9,7 @@ const props = defineProps({
 const emit = defineEmits(['updateValue']);
 const changeValue = ref(props.value || 2);
 
-function clickOnThumb(event: number) {
+function handleThumbClick(event: number) { // Renamed function
     changeValue.value = event;
     emit('updateValue', changeValue.value);
 }
@@ -55,10 +55,12 @@ function increaseButton() {
                     :aria-valuetext="displayText" 
                 />
                 <div class="flex justify-between absolute top-1/2 w-full transform -translate-y-1/2 z-0">
-                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(1)"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(2)"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(3)"></span>
-                    <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(4)"></span>
+                    <span
+                        v-for="index in 4"
+                        :key="index"
+                        class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer"
+                        @click="handleThumbClick(index)"
+                    ></span>
                 </div>
             </div>
 
