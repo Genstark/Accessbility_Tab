@@ -1,38 +1,62 @@
 {
+    "slider": [
+        {
+            "label": "Font Size",
+            "iconSrc": "/font.png"
+        },
+        {
+            "label": "Line Height",
+            "iconSrc": "/line-spacing.png"
+        }
+    ],
     "fontSize": [
         {
             "text": "Small",
-            "class": "text-sm"
+            "class": "text-[16px]"
         },
         {
             "text": "Default",
-            "class": "text-base"
+            "class": "text-[18px]"
         },
         {
             "text": "Large",
-            "class": "text-lg"
+            "class": "text-[20px]"
         },
         {
             "text": "Extra Large",
-            "class": "text-xl"
+            "class": "text-[22px]"
         }
     ],
     "lineHeight": [
         {
             "text": "Small",
-            "class": "leading-[20px]"
+            "class": "leading-[21.6px]"
         },
         {
             "text": "Deafult",
-            "class": "leading-[25px]"
+            "class": "leading-[25.2px]"
         },
         {
             "text": "Double",
-            "class": "leading-[30px]"
+            "class": "leading-[27px]"
         },
         {
             "text": "Extra Double",
-            "class": "leading-[35px]"
+            "class": "leading-[28.8px]"
+        }
+    ],
+    "labeledSwitch": [
+        {
+            "label": "High Contrast",
+            "iconSrc": "/brightness.png"
+        },
+        {
+            "label": "OpenDyslexic Font",
+            "iconSrc": "/translation.png"
+        },
+        {
+            "label": "Underline Links",
+            "iconSrc": "/underline.png"
         }
     ]
 }

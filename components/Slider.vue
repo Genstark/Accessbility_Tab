@@ -2,40 +2,39 @@
 const props = defineProps({
     label: String,
     iconUrl: String,
-    currentValue: Number || String,
-    currnetSize: String,
+    value: Number,
+    displayText: String
 });
 
 const emit = defineEmits(['updateValue']);
-const changeValue = ref(props.currentValue || 2);
+const changeValue = ref(props.value || 2);
 
-function clickOnThumb(event: number){
+function clickOnThumb(event: number) {
     changeValue.value = event;
     emit('updateValue', changeValue.value);
 }
 
-function decreaseButton(){
+function decreaseButton() {
     if (changeValue.value > 1) {
         changeValue.value--;
         emit('updateValue', changeValue.value);
     }
 }
 
-function increaseButton(){
+function increaseButton() {
     if (changeValue.value < 4) {
         changeValue.value++;
         emit('updateValue', changeValue.value);
     }
 }
-
 </script>
 
 <template>
     <div class="mt-5">
         <div class="flex items-center">
             <img :src="iconUrl" class="w-[24px] h-[24px]" alt="">
-            <label class="font-semibold ml-2">{{ props.label }}:
-                <span class="text-[#6B6B6B] font-normal">{{ props.currnetSize }}</span>
+            <label class="font-semibold ml-2">{{ label }}:
+                <span class="text-[#6B6B6B] font-normal">{{ displayText }}</span>
             </label>
         </div>
 
@@ -52,10 +51,10 @@ function increaseButton(){
             <div class="relative w-full">
                 <hr class="absolute top-1/2 left-0 w-full border-gray-400 transform -translate-y-1/2" />
                 <input type="range" min="1" max="4" step="1" v-model="changeValue"
-                    class="w-full appearance-none bg-transparent z-10 relative range-slider"
-                    :aria-valuetext="currnetSize" 
+                    class="w-full appearance-none bg-transparent z-10 relative range-slider pointer-events-none"
+                    :aria-valuetext="displayText" 
                 />
-                <div class="flex justify-between absolute top-1/2 w-full transform -translate-y-1/2">
+                <div class="flex justify-between absolute top-1/2 w-full transform -translate-y-1/2 z-0">
                     <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(1)"></span>
                     <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(2)"></span>
                     <span class="w-2 h-2 bg-gray-400 rounded-full pointer-events-auto cursor-pointer" @click="clickOnThumb(3)"></span>

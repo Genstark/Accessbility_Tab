@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import fontIcon from '../public/font.png';
-import lineSpaceIcon from '../public/line-spacing.png';
-import contrastThem from '../public/brightness.png';
-import dyslexicFont from '../public/translation.png';
-import underline from '../public/underline.png';
 import json from '../public/config.json';
 import { ref } from 'vue';
-import LabeledSwitch from '~/components/LabeledSwitch.vue';
 
 const selectedFontSize = ref(2);
 const selectedLineSpacing = ref(2);
@@ -16,24 +10,11 @@ const useDyslexicFont = ref(false);
 const showUnderlinedLinks = ref(false);
 
 
-const switches = [
-    {
-        label: "High Contrast",
-        iconSrc: contrastThem,
-        modelValue: isHighContrast
-    },
-    {
-        label: "OpenDyslexic Font",
-        iconSrc: dyslexicFont,
-        modelValue: useDyslexicFont
-    },
-    {
-        label: "Underline Links",
-        iconSrc: underline,
-        modelValue: showUnderlinedLinks
-    }
+const toogleValue = [
+    isHighContrast,
+    useDyslexicFont,
+    showUnderlinedLinks
 ];
-
 
 function fontupdate(newvalue: number) {
     selectedFontSize.value = newvalue;
@@ -42,12 +23,10 @@ function fontupdate(newvalue: number) {
 function lineudpate(newvalue: number){
     selectedLineSpacing.value = newvalue;
 }
-
-const checked = ref(false);
-
-watch(checked, (newvalue) => {
-    console.log(newvalue);
-});
+const slidercomponentfunction = [
+    fontupdate,
+    lineudpate
+];
 </script>
 
 <template>
@@ -64,32 +43,26 @@ watch(checked, (newvalue) => {
         <hr>
         <div class="bg-white mt-6 pl-9 p-6 rounded-lg shadow-sm w-6xl relative">
             <h2 class="text-xl font-bold text-[#2D2D2D]">Accessibility</h2>
-
+            
             <Slider 
-                label="Font Size"
-                :iconUrl="fontIcon"
-                :currentValue="2"
-                @updateValue="fontupdate"
-                :currnetSize="json.fontSize[selectedFontSize-1].text"
-            />
-
-            <Slider 
-                label="Line Height"
-                :iconUrl="lineSpaceIcon"
-                :currentValue="2"
-                @updateValue="lineudpate"
-                :currnetSize="json.lineHeight[selectedLineSpacing-1].text"
+                v-for="(item, index) in json.slider"
+                :key="index"
+                :label="item.label"
+                :iconUrl="item.iconSrc" 
+                @updateValue="slidercomponentfunction[index]"
+                :displayText="index === 0 ? json.fontSize[selectedFontSize-1].text : json.lineHeight[selectedLineSpacing-1].text"
+                :value="index === 0 ? selectedFontSize : selectedLineSpacing"
             />
 
             <LabeledSwitch
-                v-for="(item, index) in switches"
+                v-for="(item, index) in json.labeledSwitch"
                 :key="index"
                 :label="item.label"
                 :iconUrl="item.iconSrc"
-                v-model="item.modelValue.value"
+                v-model="toogleValue[index].value"
             />
 
-            <div class="mt-3 border p-3 w-fit h-fit absolute right-0 rounded-lg top-[28%] mr-6"
+            <div class="mt-3 border p-3 max-w-xl max-h-lg absolute right-0 rounded-lg top-[24%] mr-6"
                 :class="{ 'dyslexic-text': useDyslexicFont }" aria-hidden="true">
 
                 <h3 class="text-lg font-semibold">
@@ -97,9 +70,9 @@ watch(checked, (newvalue) => {
                 </h3>
 
                 <p class="mt-2 mb-2 text-[#6B6B6B]" :class="json.fontSize[selectedFontSize-1].class, json.lineHeight[selectedLineSpacing-1].class">
-                    Check it out! Here's an example body paragraph. Toggle <br />
-                    the font size to make this text larger or smaller. Saving <br />
-                    these changes will update the text across the entire <br />
+                    Check it out! Here's an example body paragraph. Toggle
+                    the font size to make this text larger or smaller. Saving
+                    these changes will update the text across the entire
                     app.
                 </p>
 
@@ -123,46 +96,18 @@ watch(checked, (newvalue) => {
                     </Button>
                 </div>
             </div>
-
             <div class="mt-6 flex justify-between items-end" aria-hidden="true">
-                <label class="ml-auto relative mb-[7px] text-[#6B6B6B] hover:cursor-pointer">More Details</label>
-                <img src="../public/maximize.png" class="h-[22px] w-[22px] cursor-pointer mb-2 ml-1" alt="">
+                <label class="ml-auto relative mb-[9px] text-[#6B6B6B] hover:cursor-pointer">More Details</label>
+                <img src="../public/maximize.png" class="h-[24px] w-[24px] cursor-pointer mb-2 ml-1" alt="">
                 <div aria-hidden="true">
-                    <Button class="border rounded-xl p-2 ml-2 hover:cursor-pointer text-[#6B6B6B] bg-[white] hover:bg-[none]">
-                        Reset Default Settings
-                    </Button>
-                    <Button class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:cursor-pointer hover:bg-[none]">
-                        Apply Settings
-                    </Button>
+                    <button class="border rounded-xl p-2 ml-2 hover:cursor-pointer" disabled>Reset
+                        Default
+                        Settings</button>
+                    <button class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:cursor-pointer" 
+                        disabled>Apply Settings
+                    </button>
                 </div>
             </div>
         </div>
-        <!-- <div>
-            <span v-if="checked" class="relative bottom-[5px] left-[13px] text-sm font-semibold text-[white] pointer-events-none select-none">I</span>
-            <Switch style="width: 45px; height: 25px;" v-model="checked" />
-            <span v-if="!checked" class="relative bottom-[5px] right-[16px] text-sm font-semibold text-[white] pointer-events-none select-none">O</span>
-        </div> -->
     </div>
 </template>
-
-<style scoped>
-/* button[role="switch"] span[data-slot="switch-thumb"] {
-    background-color: aquamarine !important;
-} */
-/* :deep(button[data-state="checked"]){
-    background-color: #D16A3B;
-}
-:deep(button[data-state="unchecked"]){
-    background-color: rgb(107 114 128) !important;
-}
-:deep(span[data-slot="switch-thumb"]) {
-    height: 20px;
-    width: 20px;
-}
-:deep(span[data-state="unchecked"]){
-    --tw-translate-x: 2px;
-}
-:deep(span[data-state="checked"]) {
-    --tw-translate-x: calc(100% - -2px);
-} */
-</style>
