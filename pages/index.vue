@@ -100,12 +100,20 @@ const slidercomponentfunction = [
                 <label class="ml-auto relative mb-[9px] text-[#6B6B6B] hover:cursor-pointer">More Details</label>
                 <img src="../public/maximize.png" class="h-[24px] w-[24px] cursor-pointer mb-2 ml-1" alt="">
                 <div aria-hidden="true">
-                    <button class="border rounded-xl p-2 ml-2 hover:cursor-pointer" disabled>Reset
-                        Default
-                        Settings</button>
-                    <button class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:cursor-pointer" 
-                        disabled>Apply Settings
-                    </button>
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        class="border rounded-xl p-2 ml-2 hover:cursor-pointer"
+                    >
+                        Reset Default Settings
+                    </Button>
+                    <Button
+                        variant="default"
+                        size="lg"
+                        class="border rounded-xl p-2 ml-2 bg-[#D16A3B] text-[white] hover:bg-[#b3542e]"
+                    >
+                        Apply Settings
+                    </Button>
                 </div>
             </div>
         </div>
